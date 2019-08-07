@@ -1,10 +1,16 @@
 .OrderTab {
   display: flex;
+  padding-top: .8em;
+
+  &:first-child {
+    padding-top: 0;
+  }
 
   h4 {
     margin: 0;
     font-family: $fontAbel;
     color: #e6e6e6;
-    font-size: 1em;
+    font-size: 1.2em;
+    letter-spacing: .03em;
   }
 }

@@ -1,10 +1,16 @@
 import React from 'react';
 
-const NoteTab = () => {
+const NoteTab = (props) => {
+  const { title, copy} = props;
   return (
     <div className='NoteTab'>
-      <h5>Note Title</h5>
-      <p>Subtitle Information Copy Goes Here</p>
+      <section className="noteStatus">
+        <span className="currentStatus"></span>
+      </section>
+      <section className="notePreview">
+        <h5>{title}</h5>
+        <p>{copy}</p>
+      </section>
     </div>
   )
 }

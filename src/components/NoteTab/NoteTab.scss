@@ -1,13 +1,31 @@
 .NoteTab {
   display: flex;
-  flex-direction: column;
-  width: 90%;
-  line-height: 1.4;
+  flex-direction: row;
+  align-items: center;
   padding: .6em 0em;
-  border-bottom: solid 1px #424242;
+  width: 100%;
 
-  &:last-child {
+  &:first-child {
+    padding-top: 0;
+  }
 
+  .noteStatus {
+    padding-right: .9em;
+    padding-bottom: .6em;
+
+    .currentStatus {
+      display: flex;
+      background: green;
+      border-radius: 50%;
+      height: 15px;
+      width: 15px;
+    }
+  }
+
+  .notePreview {
+    line-height: 1.4;
+    border-bottom: solid 1px #424242;
+    padding-bottom: .6em;
   }
 
   h5 {
@@ -23,6 +41,7 @@
     font-weight: 300;
     display: block;
     width: 96%;
+    max-width: 275px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;

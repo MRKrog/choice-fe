@@ -7,13 +7,30 @@ import NoteTab from '../../components/NoteTab/NoteTab';
 
 export class NoteContainer extends Component {
 
+  handleNoteTabClick = (e, id) => {
+    e.preventDefault()
+
+    console.log(id);
+  }
+
   render() {
+    const { currentNotes } = this.props;
+    const { handleNoteTabClick } = this.props;
+
     return (
       <div className='NoteContainer'>
         <section className="NoteTab-Container">
-          <NoteTab />
-          <NoteTab />
+          {
+            currentNotes.map(note => {
+              return (
+                <NoteTab key={note.id} {...note} onClick={() => this.handleNoteTabClick(note.id)}/>
+              )
+            })
+          }
         </section>
+        <button className="newBtn">
+          <i className="fas fa-plus"></i> New Note
+        </button>
       </div>
     )
   }

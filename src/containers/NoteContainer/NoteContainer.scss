@@ -1,6 +1,9 @@
 .NoteContainer {
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background: #1d1d1d;
+  padding: .6em 0 .6em .6em;
   flex: 2 1;
   border-top: solid 1px #000000;
   border-right: solid 1px #000000;
@@ -10,5 +13,34 @@
     flex-direction: column;
     width: 100%;
     align-items: flex-end;
+  }
+
+  .newBtn {
+    transition: all .3s ease;
+    opacity: 1;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 1em;
+    padding: 0;
+    font-family: $fontAbel;
+    color: #e6e6e6;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 1.1em;
+    outline: none;
+
+    i {
+      font-size: .7em;
+      border-radius: 50%;
+      color: #e6e6e6;
+      margin-right: .5em;
+      text-align: center;
+    }
+
+    &:hover {
+      opacity: .5;
+    }
   }
 }

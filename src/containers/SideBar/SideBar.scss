@@ -1,5 +1,7 @@
 .SideBar {
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background: #3e3e3e;
   padding: .6em;
   flex: 1.2 1;
@@ -8,5 +10,52 @@
 
   .OrderTab-Container {
     width: 100%;
+
+    .order-click {
+      display: flex;
+      transition: all .3s ease;
+      opacity: 1;
+      cursor: pointer;
+      width: 100%;
+      text-decoration: none;
+      padding-top: .8em;
+
+      &:hover {
+        opacity: .6;
+      }
+
+      &:first-child {
+        padding-top: 0;
+      }
+    }
+  }
+
+  .newBtn {
+    transition: all .3s ease;
+    opacity: 1;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 1em;
+    padding: 0;
+    justify-content: flex-end;
+    margin-right: .5em;
+    font-family: $fontAbel;
+    color: #e6e6e6;
+    display: flex;
+    align-items: center;
+    outline: none;
+
+    i {
+      font-size: .7em;
+      border-radius: 50%;
+      color: #e6e6e6;
+      margin-right: .5em;
+      text-align: center;
+    }
+
+    &:hover {
+      opacity: .5;
+    }
   }
 }
