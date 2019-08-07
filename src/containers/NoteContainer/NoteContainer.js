@@ -3,16 +3,20 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as actions from '../../actions';
 
+import NoteTab from '../../components/NoteTab/NoteTab';
+
 export class NoteContainer extends Component {
 
   render() {
     return (
       <div className='NoteContainer'>
-        <div>NoteContainer</div>
+        <section className="NoteTab-Container">
+          <NoteTab />
+          <NoteTab />
+        </section>
       </div>
     )
   }
-
 }
 
 export const mapStateToProps = state => ({

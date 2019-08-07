@@ -4,15 +4,63 @@ import PropTypes from 'prop-types';
 import * as actions from '../../actions';
 
 export class NoteDisplay extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: '',
+      copy: ''
+    }
+  }
 
   componentDidMount() {
 
   }
 
+  handleTitleChange = (e) => {
+    const { name, value } = e.target
+    this.setState({
+      [name]: value
+    })
+  }
+
+  handleNoteSave = (e) => {
+    console.log('item saved')
+  }
+
   render() {
+
     return (
       <div className='NoteDisplay'>
-        <div>NoteDisplay</div>
+        <section className="NoteInput-Container ">
+          <div className="NoteTitle-Container">
+            <label>Title</label>
+            <input type="text"
+                   className="note-title"
+                   placeholder="Enter A Title..."
+                   value={this.state.title}
+                   name="title"
+                   autoComplete="off"
+                   onChange={this.handleTitleChange} />
+          </div>
+          <div className="NoteCopy-Container">
+            <label>Information</label>
+            <textarea type="text"
+                      rows="20"
+                      cols="20"
+                      className="note-copy"
+                      placeholder="Enter Some Copy..."
+                      value={this.state.copy}
+                      name="copy"
+                      autoComplete="off"
+                      onChange={this.handleTitleChange}>
+              </textarea>
+          </div>
+        </section>
+        <section className="NoteSave">
+          <button className="save-button" onClick={(e) => this.handleNoteSave(e)}>
+            <i className="fas fa-save"></i>
+          </button>
+        </section>
       </div>
     )
   }

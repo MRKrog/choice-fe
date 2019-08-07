@@ -1,6 +1,95 @@
 .NoteDisplay {
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background: #e4e4e4;
   padding: 1em;
   flex: 5;
+
+  .NoteInput-Container {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1em;
+
+    label {
+      color: #616161;
+      font-size: .8em;
+      padding-bottom: .25em;
+      font-weight: 300;
+      opacity: .5;
+      // font-style: italic;
+      letter-spacing: .05em;
+      font-family: $fontOswald;
+    }
+
+    .NoteTitle-Container {
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 1em;
+
+      input {
+        border: none;
+        font-size: 15px;
+        padding: 5px;
+        border-radius: 2px;
+        background: #d6d6d6;
+        outline: none;
+        color: #777777;
+        font-family: $fontLato;
+
+        &::placeholder {
+          font-family: $fontAbel;
+          opacity: .3;
+          font-size: 14px;
+        }
+      }
+    }
+
+    .NoteCopy-Container {
+      display: flex;
+      flex-direction: column;
+
+      textarea {
+        border: none;
+        font-size: 13px;
+        padding: 5px;
+        border-radius: 2px;
+        background: #d6d6d6;
+        outline: none;
+        color: #777777;
+        font-family: $fontLato;
+
+        &::placeholder {
+          font-family: $fontAbel;
+          opacity: .3;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+  .NoteSave {
+    display: flex;
+    justify-content: flex-end;
+
+    .save-button {
+      background: #f18805;
+      border: solid 1px #d8770094;
+      transition: all .3s ease;
+      opacity: 1;
+      cursor: pointer;
+      border-radius: 50%;
+      padding: 1em;
+      outline: none;
+
+      i {
+        font-size: 2em;
+        color: #ffffff;
+      }
+
+      &:hover {
+        opacity: .5;
+      }
+    }
+  }
 }
