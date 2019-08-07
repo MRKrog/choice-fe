@@ -1,29 +1,40 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import * as actions from '../../actions';
+
 import Header from '../Header/Header';
 import SideBar from '../SideBar/SideBar';
 import NoteContainer from '../NoteContainer/NoteContainer';
 import NoteDisplay from '../NoteDisplay/NoteDisplay';
 
-import PropTypes from 'prop-types';
-import * as actions from '../../actions';
+import { fetchAllOrders } from '../../thunks/fetchAllOrders';
+import { fetchAllNotes } from '../../thunks/fetchAllNotes';
 
 import { mockOrders, mockNotes } from '../../mockData.js';
 
 export class App extends Component {
 
   componentDidMount() {
-    this.props.setLoading(true);
-    this.props.setOrders(mockOrders)
-    this.props.setNotes(mockNotes)
-    this.props.setLoading(false);
+    const { fetchAllOrders, fetchAllNotes } = this.props;
+    fetchAllOrders();
+    fetchAllNotes();
+
+    // this.props.setLoading(true);
+    // this.props.setOrders(mockOrders)
+    // this.props.setNotes(mockNotes)
+    // this.props.setLoading(false);
+  }
+
+  fetchInformation = async () => {
+
   }
 
   render() {
     console.log('App Re-Rendered');
 
     const { currentOrder, currentNote } = this.props;
-    const currNoteTabs =this.props.notes.filter(note => note.order_number === currentOrder);
+    const currNoteTabs =this.props.notes.filter(note => note.order_id == currentOrder);
     const clickedNote = this.props.notes.find(note => note.id === currentNote);
 
     return (
@@ -35,7 +46,7 @@ export class App extends Component {
             <SideBar />
           }
           {
-            typeof this.props.currentOrder == 'number' &&
+            this.props.notes.length &&
             <NoteContainer currNoteTabs={currNoteTabs} key={currentOrder}/>
           }
           {
@@ -61,6 +72,8 @@ export const mapDispatchToProps = dispatch => ({
   setOrders: data => dispatch(actions.setOrders(data)),
   setNotes: data => dispatch(actions.setNotes(data)),
   setCurrOrder: data => dispatch(actions.setCurrOrder(data)),
+  fetchAllOrders: data => dispatch(fetchAllOrders(data)),
+  fetchAllNotes: data => dispatch(fetchAllNotes(data)),
 });
 
 App.propTypes = {

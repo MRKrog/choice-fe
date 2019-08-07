@@ -36,8 +36,8 @@ export class NoteDisplay extends Component {
     console.log('note deleted')
   }
 
-  handlePriority = () => {
-    console.log('changed priority')
+  handlePriority = (priority) => {
+    console.log(priority, 'changed priority')
   }
 
   render() {
@@ -75,9 +75,9 @@ export class NoteDisplay extends Component {
           <div className="Note-Priority">
             <h6>Note Priority</h6>
             <ul>
-              <li className="low"><button onClick={() => this.handlePriority(id)}></button></li>
-              <li className="medium"><button onClick={() => this.handlePriority(id)}></button></li>
-              <li className="high"><button onClick={() => this.handlePriority(id)}></button></li>
+              <li className="low"><button onClick={() => this.handlePriority(0)}></button></li>
+              <li className="medium"><button onClick={() => this.handlePriority(1)}></button></li>
+              <li className="high"><button onClick={() => this.handlePriority(2)}></button></li>
             </ul>
           </div>
           <div className="Note-Updates">

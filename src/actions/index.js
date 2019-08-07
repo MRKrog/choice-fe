@@ -3,6 +3,11 @@ export const setLoading = loading => ({
   loading
 });
 
+export const setError = error => ({
+  type: "SET_ERROR",
+  error
+});
+
 export const setOrders = orders => ({
   type: "SET_ORDERS",
   orders

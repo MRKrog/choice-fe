@@ -6,18 +6,18 @@ import * as actions from '../../actions';
 export class OrderTab extends Component {
 
   render() {
-    const { order_number, currentOrder, setCurrOrder } = this.props;
+    const { id, number, currentOrder, setCurrOrder } = this.props;
 
     let orderStyle;
-    if(order_number === currentOrder) {
+    if(id === currentOrder) {
       orderStyle = "OrderTab status-true";
     } else {
       orderStyle = "OrderTab status-false";
     }
 
     return (
-      <div className={orderStyle} onClick={() => setCurrOrder(order_number)}>
-        <h4>Order #{order_number}</h4>
+      <div className={orderStyle} onClick={() => setCurrOrder(id)}>
+        <h4>Order #{number}</h4>
       </div>
     )
   }

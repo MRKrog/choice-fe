@@ -10,7 +10,8 @@ export class SideBar extends Component {
   componentDidMount() {
     const { setCurrOrder, orders, currentOrder } = this.props;
     if(!currentOrder.length){
-      setCurrOrder(orders[0].order_number)
+      console.log('orders', orders[0].id);
+      setCurrOrder(orders[0].id)
     }
   }
 
@@ -29,9 +30,6 @@ export class SideBar extends Component {
           })
         }
         </section>
-        <button className="newBtn">
-          <i className="fas fa-plus"></i> New Order
-        </button>
       </div>
     )
   }

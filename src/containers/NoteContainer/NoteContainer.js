@@ -10,6 +10,7 @@ export class NoteContainer extends Component {
   componentDidMount() {
     const { setCurrNote, currentNote, currNoteTabs } = this.props;
     if(!currentNote.length){
+      // console.log('in note container');
       setCurrNote(currNoteTabs[0].id)
     }
   }
