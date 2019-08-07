@@ -29,10 +29,20 @@ export class NoteDisplay extends Component {
   }
 
   handleNoteSave = (e) => {
-    console.log('item saved')
+    console.log('note saved')
+  }
+
+  handleNoteDelete = (e) => {
+    console.log('note deleted')
+  }
+
+  handlePriority = () => {
+    console.log('changed priority')
   }
 
   render() {
+
+    const { id } = this.props;
 
     return (
       <div className='NoteDisplay'>
@@ -50,7 +60,7 @@ export class NoteDisplay extends Component {
           <div className="NoteCopy-Container">
             <label>Information</label>
             <textarea type="text"
-                      rows="20"
+                      rows="15"
                       cols="20"
                       className="note-copy"
                       placeholder="Enter Some Copy..."
@@ -61,11 +71,29 @@ export class NoteDisplay extends Component {
               </textarea>
           </div>
         </section>
-        <section className="NoteSave">
-          <button className="save-button" onClick={(e) => this.handleNoteSave(e)}>
-            <i className="fas fa-save"></i>
-          </button>
+        <section className="Note-Actions">
+          <div className="Note-Priority">
+            <h6>Note Priority</h6>
+            <ul>
+              <li className="low"><button onClick={() => this.handlePriority(id)}></button></li>
+              <li className="medium"><button onClick={() => this.handlePriority(id)}></button></li>
+              <li className="high"><button onClick={() => this.handlePriority(id)}></button></li>
+            </ul>
+          </div>
+          <div className="Note-Updates">
+            <section className="Note-Save">
+              <button className="save-button" onClick={() => this.handleNoteSave(id)}>
+                <i className="fas fa-save"></i>
+              </button>
+            </section>
+            <section className="Note-Delete">
+              <button className="delete-button" onClick={() => this.handleNoteDelete(id)}>
+                <i className="fas fa-trash"></i>
+              </button>
+            </section>
+          </div>
         </section>
+
       </div>
     )
   }
@@ -73,6 +101,8 @@ export class NoteDisplay extends Component {
 
 export const mapStateToProps = state => ({
   loading: state.loading,
+  currentNote: state.currentNote,
+  currentOrder: state.currentOrder
 });
 
 export const mapDispatchToProps = dispatch => ({

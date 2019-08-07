@@ -4,13 +4,6 @@ import PropTypes from 'prop-types';
 import * as actions from '../../actions';
 
 export class OrderTab extends Component {
-  constructor(){
-    super()
-  }
-
-  componentDidMount() {
-
-  }
 
   render() {
     const { order_number, currentOrder, setCurrOrder } = this.props;

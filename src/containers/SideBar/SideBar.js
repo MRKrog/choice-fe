@@ -2,19 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as actions from '../../actions';
-import { Link } from 'react-router-dom';
 
 import OrderTab from '../OrderTab/OrderTab';
 
 export class SideBar extends Component {
 
   componentDidMount() {
-    const { setCurrOrder, orders } = this.props;
-    if(this.props.currentOrder.length){
-      console.log('current order exists');
-    } else {
+    const { setCurrOrder, orders, currentOrder } = this.props;
+    if(!currentOrder.length){
       setCurrOrder(orders[0].order_number)
-      console.log('current order does note exists');
     }
   }
 
@@ -25,7 +21,7 @@ export class SideBar extends Component {
       <div className='SideBar'>
         <section className="OrderTab-Container">
         {
-          typeof this.props.currentOrder == 'number' &&
+          typeof currentOrder === 'number' &&
           orders.map(info => {
             return (
               <OrderTab key={info.id} {...info}/>

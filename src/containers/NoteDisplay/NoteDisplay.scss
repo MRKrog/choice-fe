@@ -50,8 +50,9 @@
 
       textarea {
         border: none;
-        font-size: 13px;
+        font-size: 14px;
         padding: 5px;
+        line-height: 18px;
         border-radius: 2px;
         background: #d6d6d6;
         outline: none;
@@ -67,27 +68,116 @@
     }
   }
 
-  .NoteSave {
+  .Note-Actions {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: flex-end;
 
-    .save-button {
-      background: #f18805;
-      border: solid 1px #d8770094;
-      transition: all .3s ease;
-      opacity: 1;
-      cursor: pointer;
-      border-radius: 50%;
-      padding: 1em;
-      outline: none;
+    .Note-Priority {
+      display: flex;
+      flex-direction: column;
 
-      i {
-        font-size: 2em;
-        color: #ffffff;
+      h6 {
+        color: #616161;
+        font-size: 16px;
+        line-height: 1;
+        opacity: .6;
+        font-family: $fontAbel;
+        margin: 0;
       }
 
-      &:hover {
-        opacity: .5;
+      ul {
+        padding: 0;
+        margin: 0;
+        display: flex;
+
+        li {
+          padding: 0;
+          list-style-type: none;
+          button {
+            border: none;
+            border-radius: 50%;
+            padding: 1em;
+            outline: none;
+            transition: all .5s ease;
+            opacity: 1;
+            cursor: pointer;
+          }
+        }
+
+        .low {
+          button {
+            background: green;
+          }
+        }
+
+        .medium {
+          padding: 0 .6em;
+          button {
+            background: yellow;
+          }
+        }
+
+        .high {
+          button {
+            background: red;
+          }
+        }
+      }
+    }
+
+    .Note-Updates {
+      display: flex;
+      height: 80%;
+
+      button {
+        width: 45px;
+        outline: none;
+        background-color: #f18805;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        opacity: 1;
+        -webkit-transition: all .5s ease;
+        transition: all .5s ease;
+      }
+
+      .Note-Save {
+        display: flex;
+
+        .save-button {
+          border-top-left-radius: 30px;
+          border-bottom-left-radius: 30px;
+          padding-right: 0;
+          margin-right: .1em;
+          i {
+            font-size: 2em;
+            color: #ffffff;
+          }
+
+          &:hover {
+            opacity: .5;
+          }
+        }
+      }
+      .Note-Delete {
+        display: flex;
+        justify-content: flex-end;
+
+        .delete-button {
+          border-top-right-radius: 30px;
+          border-bottom-right-radius: 30px;
+          padding-left: 0;
+
+          i {
+            font-size: 1.8em;
+            color: #ffffff;
+          }
+
+          &:hover {
+            opacity: .5;
+          }
+        }
       }
     }
   }

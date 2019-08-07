@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as actions from '../../actions';
-import { Link } from 'react-router-dom';
 
 import NoteTab from '../../components/NoteTab/NoteTab';
 
@@ -10,7 +9,7 @@ export class NoteContainer extends Component {
 
   componentDidMount() {
     const { setCurrNote, currentNote, currNoteTabs } = this.props;
-    if(!this.props.currentNote.length){
+    if(!currentNote.length){
       setCurrNote(currNoteTabs[0].id)
     }
   }

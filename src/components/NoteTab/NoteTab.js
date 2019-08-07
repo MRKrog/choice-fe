@@ -4,13 +4,6 @@ import PropTypes from 'prop-types';
 import * as actions from '../../actions';
 
 export class NoteTab extends Component {
-  constructor(){
-    super()
-  }
-
-  componentDidMount() {
-
-  }
 
   handleCurrentStatus = (status) => {
     parseInt(status)
@@ -30,16 +23,13 @@ export class NoteTab extends Component {
     const { title, copy, id, setCurrNote, currentNote, status } = this.props;
 
     let noteTabStyle;
-    if(id == currentNote) {
+    if(id === currentNote) {
       noteTabStyle = "NoteTab status-true";
     } else {
       noteTabStyle = "NoteTab status-false";
     }
 
     let currentStatus = this.handleCurrentStatus(status)
-
-    console.log(currentStatus);
-
 
     return (
       <div className={noteTabStyle} onClick={() => setCurrNote(id)}>

@@ -6,7 +6,6 @@ import NoteContainer from '../NoteContainer/NoteContainer';
 import NoteDisplay from '../NoteDisplay/NoteDisplay';
 
 import PropTypes from 'prop-types';
-import { Route, Switch } from "react-router-dom";
 import * as actions from '../../actions';
 
 import { mockOrders, mockNotes } from '../../mockData.js';
@@ -24,8 +23,8 @@ export class App extends Component {
     console.log('App Re-Rendered');
 
     const { currentOrder, currentNote } = this.props;
-    const currNoteTabs =this.props.notes.filter(note => note.order_number == currentOrder);
-    const clickedNote = this.props.notes.find(note => note.id == currentNote);
+    const currNoteTabs =this.props.notes.filter(note => note.order_number === currentOrder);
+    const clickedNote = this.props.notes.find(note => note.id === currentNote);
 
     return (
       <div className='App'>
