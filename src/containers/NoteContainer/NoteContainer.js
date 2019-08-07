@@ -2,28 +2,30 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as actions from '../../actions';
+import { Link } from 'react-router-dom';
 
 import NoteTab from '../../components/NoteTab/NoteTab';
 
 export class NoteContainer extends Component {
 
-  handleNoteTabClick = (e, id) => {
-    e.preventDefault()
-
-    console.log(id);
+  componentDidMount() {
+    const { setCurrNote, currentNote, currNoteTabs } = this.props;
+    if(!this.props.currentNote.length){
+      setCurrNote(currNoteTabs[0].id)
+    }
   }
 
+
   render() {
-    const { currentNotes } = this.props;
-    const { handleNoteTabClick } = this.props;
+    const { currNoteTabs } = this.props;
 
     return (
       <div className='NoteContainer'>
         <section className="NoteTab-Container">
           {
-            currentNotes.map(note => {
+            currNoteTabs.map(note => {
               return (
-                <NoteTab key={note.id} {...note} onClick={() => this.handleNoteTabClick(note.id)}/>
+                <NoteTab key={note.id} {...note} />
               )
             })
           }
@@ -38,10 +40,12 @@ export class NoteContainer extends Component {
 
 export const mapStateToProps = state => ({
   loading: state.loading,
+  currentNote: state.currentNote,
 });
 
 export const mapDispatchToProps = dispatch => ({
   setLoading: data => dispatch(actions.setLoading(data)),
+  setCurrNote: data => dispatch(actions.setCurrNote(data)),
 });
 
 NoteContainer.propTypes = {

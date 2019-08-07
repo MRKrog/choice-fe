@@ -13,11 +13,16 @@ export class NoteDisplay extends Component {
   }
 
   componentDidMount() {
-
+    const { title, copy } = this.props;
+    this.setState({
+      title,
+      copy
+    })
   }
 
   handleTitleChange = (e) => {
     const { name, value } = e.target
+    console.log(this.state);
     this.setState({
       [name]: value
     })

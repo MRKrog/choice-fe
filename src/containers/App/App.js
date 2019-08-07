@@ -21,23 +21,28 @@ export class App extends Component {
   }
 
   render() {
+    console.log('App Re-Rendered');
 
-    // <NoteContainer />
+    const { currentOrder, currentNote } = this.props;
+    const currNoteTabs =this.props.notes.filter(note => note.order_number == currentOrder);
+    const clickedNote = this.props.notes.find(note => note.id == currentNote);
+
     return (
       <div className='App'>
       <Header />
         <section className="Content-Container">
-          <SideBar />
           {
-            this.props.notes.length &&
-            <Route path="/order/:id" render={({match}) => {
-              const { id } = match.params;
-              const currentNotes = this.props.notes.filter(note => note.order_number == id);
-              return <NoteContainer currentNotes={currentNotes}/>
-            }} />
+            this.props.orders.length &&
+            <SideBar />
           }
-
-          <NoteDisplay />
+          {
+            typeof this.props.currentOrder == 'number' &&
+            <NoteContainer currNoteTabs={currNoteTabs} key={currentOrder}/>
+          }
+          {
+            typeof this.props.currentNote == 'number' &&
+            <NoteDisplay {...clickedNote} key={clickedNote.id}/>
+          }
         </section>
       </div>
     )
@@ -48,12 +53,15 @@ export const mapStateToProps = state => ({
   loading: state.loading,
   orders: state.orders,
   notes: state.notes,
+  currentOrder: state.currentOrder,
+  currentNote: state.currentNote,
 });
 
 export const mapDispatchToProps = dispatch => ({
   setLoading: data => dispatch(actions.setLoading(data)),
   setOrders: data => dispatch(actions.setOrders(data)),
   setNotes: data => dispatch(actions.setNotes(data)),
+  setCurrOrder: data => dispatch(actions.setCurrOrder(data)),
 });
 
 App.propTypes = {

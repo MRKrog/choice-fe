@@ -3,7 +3,6 @@
   flex-direction: column;
   justify-content: space-between;
   background: #1d1d1d;
-  padding: .6em 0 .6em .6em;
   flex: 2 1;
   border-top: solid 1px #000000;
   border-right: solid 1px #000000;
@@ -29,6 +28,7 @@
     align-items: center;
     justify-content: flex-end;
     margin-right: 1.1em;
+    margin-bottom: .6em;
     outline: none;
 
     i {

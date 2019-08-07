@@ -1,6 +1,20 @@
 .OrderTab {
   display: flex;
   padding-top: .8em;
+  transition: all .3s ease;
+  opacity: 1;
+  cursor: pointer;
+
+  &.status-true {
+    opacity: .6;
+    pointer-events: none;
+  }
+
+  &:hover {
+    &.status-false {
+      opacity: .6
+    }
+  }
 
   &:first-child {
     padding-top: 0;

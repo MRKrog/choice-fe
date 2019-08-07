@@ -4,27 +4,31 @@ import PropTypes from 'prop-types';
 import * as actions from '../../actions';
 import { Link } from 'react-router-dom';
 
-import OrderTab from '../../components/OrderTab/OrderTab';
+import OrderTab from '../OrderTab/OrderTab';
 
 export class SideBar extends Component {
 
   componentDidMount() {
-
+    const { setCurrOrder, orders } = this.props;
+    if(this.props.currentOrder.length){
+      console.log('current order exists');
+    } else {
+      setCurrOrder(orders[0].order_number)
+      console.log('current order does note exists');
+    }
   }
 
   render() {
-    const { orders } = this.props;
+    const { currentOrder, orders } = this.props;
 
     return (
       <div className='SideBar'>
         <section className="OrderTab-Container">
         {
-          orders.length &&
+          typeof this.props.currentOrder == 'number' &&
           orders.map(info => {
             return (
-              <Link to={`/order/${info.order_number}`} key={info.id} className='order-click'>
-                <OrderTab key={info.id} {...info}/>
-              </Link>
+              <OrderTab key={info.id} {...info}/>
             )
           })
         }
@@ -40,10 +44,12 @@ export class SideBar extends Component {
 export const mapStateToProps = state => ({
   loading: state.loading,
   orders: state.orders,
+  currentOrder: state.currentOrder
 });
 
 export const mapDispatchToProps = dispatch => ({
   setLoading: data => dispatch(actions.setLoading(data)),
+  setCurrOrder: data => dispatch(actions.setCurrOrder(data)),
 });
 
 SideBar.propTypes = {

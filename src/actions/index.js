@@ -12,3 +12,13 @@ export const setNotes = notes => ({
   type: "SET_NOTES",
   notes
 });
+
+export const setCurrOrder = currentOrder => ({
+  type: "SET_CURRENT_ORDER",
+  currentOrder
+});
+
+export const setCurrNote = currentNote => ({
+  type: "SET_CURRENT_NOTE",
+  currentNote
+});

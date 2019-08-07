@@ -1,18 +1,73 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import * as actions from '../../actions';
 
-const NoteTab = (props) => {
-  const { title, copy} = props;
-  return (
-    <div className='NoteTab'>
-      <section className="noteStatus">
-        <span className="currentStatus"></span>
-      </section>
-      <section className="notePreview">
-        <h5>{title}</h5>
-        <p>{copy}</p>
-      </section>
-    </div>
-  )
+export class NoteTab extends Component {
+  constructor(){
+    super()
+  }
+
+  componentDidMount() {
+
+  }
+
+  handleCurrentStatus = (status) => {
+    parseInt(status)
+    switch(status){
+      case 0:
+        return "#008000";
+      case 1:
+       return "#ffff00";
+      case 2:
+        return "#ff0000"
+      default:
+        return "#008000";
+    }
+  }
+
+  render() {
+    const { title, copy, id, setCurrNote, currentNote, status } = this.props;
+
+    let noteTabStyle;
+    if(id == currentNote) {
+      noteTabStyle = "NoteTab status-true";
+    } else {
+      noteTabStyle = "NoteTab status-false";
+    }
+
+    let currentStatus = this.handleCurrentStatus(status)
+
+    console.log(currentStatus);
+
+
+    return (
+      <div className={noteTabStyle} onClick={() => setCurrNote(id)}>
+        <section className="noteStatus">
+          <span className="currentStatus" style={{ backgroundColor: currentStatus }}></span>
+        </section>
+        <section className="notePreview">
+          <h5>{title}</h5>
+          <p>{copy}</p>
+        </section>
+      </div>
+    )
+  }
 }
 
-export default NoteTab;
+export const mapStateToProps = state => ({
+  loading: state.loading,
+  currentNote: state.currentNote,
+  currentOrder: state.currentOrder
+});
+
+export const mapDispatchToProps = dispatch => ({
+  setLoading: data => dispatch(actions.setLoading(data)),
+  setCurrNote: data => dispatch(actions.setCurrNote(data)),
+});
+
+NoteTab.propTypes = {
+  loading: PropTypes.bool,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NoteTab);
