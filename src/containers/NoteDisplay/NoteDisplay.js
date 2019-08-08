@@ -3,33 +3,51 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as actions from '../../actions';
 
+import { fetchAllNotes } from '../../thunks/fetchAllNotes';
+import { fetchData } from '../../utility/fetchData';
+import { fetchOptions } from '../../utility/fetchOptions';
+
 export class NoteDisplay extends Component {
   constructor(props) {
     super(props);
     this.state = {
       title: '',
-      copy: ''
+      copy: '',
+      status: '',
     }
   }
 
   componentDidMount() {
-    const { title, copy } = this.props;
+    const { title, copy, status } = this.props;
     this.setState({
       title,
-      copy
+      copy,
+      status
     })
   }
 
   handleTitleChange = (e) => {
     const { name, value } = e.target
-    console.log(this.state);
     this.setState({
       [name]: value
     })
   }
 
-  handleNoteSave = (e) => {
-    console.log('note saved')
+  handleNoteSave = async () => {
+    const { updateNote, id, order_id } = this.props;
+    let path = this.props.notSaved ? 'POST' : 'PUT';
+    let sendObject = this.props.notSaved ? { ...this.state, order_id } : this.state
+    let urlEnd = this.props.notSaved ? '/api/v1/notes/' : `/api/v1/notes/${id}`;
+    const options = await fetchOptions(path, sendObject);
+    await fetchData(process.env.REACT_APP_BACKEND_URL + `${urlEnd}`, options);
+    updateNote(id, this.state)
+  }
+
+  handleAddNote = async id => {
+    const { fetchAllNotes, updateNote } = this.props;
+    const options = await fetchOptions('PUT', this.state);
+    await fetchData(process.env.REACT_APP_BACKEND_URL + `/api/v1/notes/${id}`, options);
+    updateNote(id, this.state)
   }
 
   handleNoteDelete = (e) => {
@@ -37,13 +55,32 @@ export class NoteDisplay extends Component {
   }
 
   handlePriority = (priority) => {
-    console.log(priority, 'changed priority')
+    const { id, updateStatus } = this.props;
+    this.setState({
+      status: priority
+    })
+    updateStatus(id, priority)
   }
 
   render() {
+    const { id, status } = this.props;
 
-    const { id } = this.props;
-
+    let lowStyle = 'low'
+    let mediumStyle = 'medium'
+    let highStyle = 'high'
+    console.log(status);
+    switch (status) {
+      case 0:
+        lowStyle = 'low active';
+        break;
+      case 1:
+        mediumStyle = 'medium active';
+        break;
+      case 2:
+        highStyle = 'high active';
+        break;
+      default:
+    }
     return (
       <div className='NoteDisplay'>
         <section className="NoteInput-Container ">
@@ -73,11 +110,11 @@ export class NoteDisplay extends Component {
         </section>
         <section className="Note-Actions">
           <div className="Note-Priority">
-            <h6>Note Priority</h6>
+            <h6>Current Status</h6>
             <ul>
-              <li className="low"><button onClick={() => this.handlePriority(0)}></button></li>
-              <li className="medium"><button onClick={() => this.handlePriority(1)}></button></li>
-              <li className="high"><button onClick={() => this.handlePriority(2)}></button></li>
+              <li className={lowStyle}><button onClick={() => this.handlePriority(0)}></button></li>
+              <li className={mediumStyle}><button onClick={() => this.handlePriority(1)}></button></li>
+              <li className={highStyle}><button onClick={() => this.handlePriority(2)}></button></li>
             </ul>
           </div>
           <div className="Note-Updates">
@@ -93,7 +130,6 @@ export class NoteDisplay extends Component {
             </section>
           </div>
         </section>
-
       </div>
     )
   }
@@ -102,11 +138,15 @@ export class NoteDisplay extends Component {
 export const mapStateToProps = state => ({
   loading: state.loading,
   currentNote: state.currentNote,
-  currentOrder: state.currentOrder
+  currentOrder: state.currentOrder,
+  notes: state.notes
 });
 
 export const mapDispatchToProps = dispatch => ({
   setLoading: data => dispatch(actions.setLoading(data)),
+  fetchAllNotes: data => dispatch(fetchAllNotes(data)),
+  updateNote: (id, info) => dispatch(actions.updateNote(id, info)),
+  updateStatus: (id, status) => dispatch(actions.updateStatus(id, status)),
 });
 
 NoteDisplay.propTypes = {

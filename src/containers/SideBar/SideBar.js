@@ -10,7 +10,6 @@ export class SideBar extends Component {
   componentDidMount() {
     const { setCurrOrder, orders, currentOrder } = this.props;
     if(!currentOrder.length){
-      console.log('orders', orders[0].id);
       setCurrOrder(orders[0].id)
     }
   }
@@ -25,7 +24,7 @@ export class SideBar extends Component {
           typeof currentOrder === 'number' &&
           orders.map(info => {
             return (
-              <OrderTab key={info.id} {...info}/>
+              <OrderTab key={info.number} {...info}/>
             )
           })
         }

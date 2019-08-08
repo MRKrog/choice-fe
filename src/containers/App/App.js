@@ -11,30 +11,19 @@ import NoteDisplay from '../NoteDisplay/NoteDisplay';
 import { fetchAllOrders } from '../../thunks/fetchAllOrders';
 import { fetchAllNotes } from '../../thunks/fetchAllNotes';
 
-import { mockOrders, mockNotes } from '../../mockData.js';
-
 export class App extends Component {
 
   componentDidMount() {
     const { fetchAllOrders, fetchAllNotes } = this.props;
     fetchAllOrders();
     fetchAllNotes();
-
-    // this.props.setLoading(true);
-    // this.props.setOrders(mockOrders)
-    // this.props.setNotes(mockNotes)
-    // this.props.setLoading(false);
-  }
-
-  fetchInformation = async () => {
-
   }
 
   render() {
     console.log('App Re-Rendered');
 
     const { currentOrder, currentNote } = this.props;
-    const currNoteTabs =this.props.notes.filter(note => note.order_id == currentOrder);
+    const currNoteTabs =this.props.notes.filter(note => note.order_id === currentOrder);
     const clickedNote = this.props.notes.find(note => note.id === currentNote);
 
     return (
@@ -47,7 +36,7 @@ export class App extends Component {
           }
           {
             this.props.notes.length &&
-            <NoteContainer currNoteTabs={currNoteTabs} key={currentOrder}/>
+            <NoteContainer currNoteTabs={currNoteTabs} key={`${currentOrder}Order`}/>
           }
           {
             typeof this.props.currentNote == 'number' &&

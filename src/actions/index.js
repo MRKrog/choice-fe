@@ -27,3 +27,20 @@ export const setCurrNote = currentNote => ({
   type: "SET_CURRENT_NOTE",
   currentNote
 });
+
+export const updateNote = (id, info) => ({
+  type: "UPDATE_NOTE",
+  id,
+  info
+});
+
+export const updateStatus = (id, status) => ({
+  type: "UPDATE_STATUS",
+  id,
+  status
+});
+
+export const createNewNote = (note) => ({
+  type: "CREATE_NOTE",
+  note
+});

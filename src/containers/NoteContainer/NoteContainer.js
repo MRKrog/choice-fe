@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as actions from '../../actions';
 
+import { createNote } from '../../thunks/createNote';
+
 import NoteTab from '../../components/NoteTab/NoteTab';
 
 export class NoteContainer extends Component {
@@ -10,14 +12,13 @@ export class NoteContainer extends Component {
   componentDidMount() {
     const { setCurrNote, currentNote, currNoteTabs } = this.props;
     if(!currentNote.length){
-      // console.log('in note container');
       setCurrNote(currNoteTabs[0].id)
     }
+    console.log('in did mount');
   }
 
-
   render() {
-    const { currNoteTabs } = this.props;
+    const { currNoteTabs, createNote, currentOrder, notes } = this.props;
 
     return (
       <div className='NoteContainer'>
@@ -30,7 +31,7 @@ export class NoteContainer extends Component {
             })
           }
         </section>
-        <button className="newBtn">
+        <button className="newBtn" onClick={() => createNote(currentOrder, notes)}>
           <i className="fas fa-plus"></i> New Note
         </button>
       </div>
@@ -40,12 +41,15 @@ export class NoteContainer extends Component {
 
 export const mapStateToProps = state => ({
   loading: state.loading,
+  notes: state.notes,
   currentNote: state.currentNote,
+  currentOrder: state.currentOrder,
 });
 
 export const mapDispatchToProps = dispatch => ({
   setLoading: data => dispatch(actions.setLoading(data)),
   setCurrNote: data => dispatch(actions.setCurrNote(data)),
+  createNote: (currentOrder, notes) => dispatch(createNote(currentOrder, notes)),
 });
 
 NoteContainer.propTypes = {
