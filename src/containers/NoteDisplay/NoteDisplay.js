@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as actions from '../../actions';
 
-import { fetchAllNotes } from '../../thunks/fetchAllNotes';
 import { fetchData } from '../../utility/fetchData';
 import { fetchOptions } from '../../utility/fetchOptions';
+import { fetchDelete } from '../../thunks/fetchDelete';
 
 export class NoteDisplay extends Component {
   constructor(props) {
@@ -44,14 +44,19 @@ export class NoteDisplay extends Component {
   }
 
   handleAddNote = async id => {
-    const { fetchAllNotes, updateNote } = this.props;
+    const { updateNote } = this.props;
     const options = await fetchOptions('PUT', this.state);
     await fetchData(process.env.REACT_APP_BACKEND_URL + `/api/v1/notes/${id}`, options);
     updateNote(id, this.state)
   }
 
-  handleNoteDelete = (e) => {
-    console.log('note deleted')
+  handleNoteDelete = async id => {
+    const { fetchDelete, currentOrder, notes, deleteNote, setCurrNote } = this.props;
+    const url = `${process.env.REACT_APP_BACKEND_URL}/api/v1/notes/${id}`;
+    let orderedNotes = notes.filter(note => note.order_id === currentOrder)
+    deleteNote(id)
+    setCurrNote(orderedNotes[0].id)
+    await fetchDelete(url);
   }
 
   handlePriority = (priority) => {
@@ -64,7 +69,6 @@ export class NoteDisplay extends Component {
 
   render() {
     const { id, status } = this.props;
-
     let lowStyle = 'low'
     let mediumStyle = 'medium'
     let highStyle = 'high'
@@ -119,7 +123,7 @@ export class NoteDisplay extends Component {
           </div>
           <div className="Note-Updates">
             <section className="Note-Save">
-              <button className="save-button" onClick={() => this.handleNoteSave(id)}>
+              <button className="save-button" onClick={() => this.handleNoteSave()}>
                 <i className="fas fa-save"></i>
               </button>
             </section>
@@ -144,7 +148,9 @@ export const mapStateToProps = state => ({
 
 export const mapDispatchToProps = dispatch => ({
   setLoading: data => dispatch(actions.setLoading(data)),
-  fetchAllNotes: data => dispatch(fetchAllNotes(data)),
+  deleteNote: data => dispatch(actions.deleteNote(data)),
+  setCurrNote: data => dispatch(actions.setCurrNote(data)),
+  fetchDelete: data => dispatch(fetchDelete(data)),
   updateNote: (id, info) => dispatch(actions.updateNote(id, info)),
   updateStatus: (id, status) => dispatch(actions.updateStatus(id, status)),
 });

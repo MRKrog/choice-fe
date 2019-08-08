@@ -44,3 +44,8 @@ export const createNewNote = (note) => ({
   type: "CREATE_NOTE",
   note
 });
+
+export const deleteNote = (id) => ({
+  type: "DELETE_NOTE",
+  id
+});
