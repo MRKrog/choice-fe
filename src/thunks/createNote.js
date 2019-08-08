@@ -5,8 +5,8 @@ export const createNote = (currentOrder, notes) => {
     let sortedNotes = notes.sort((a,b) => a.id - b.id)
     let lastNumber = (sortedNotes[sortedNotes.length - 1].id) + 1
     let newNote = {
-      title: "Enter Title",
-      copy: "Enter Copy",
+      title: "",
+      copy: "",
       status: 0,
       order_id: currentOrder,
       id: lastNumber,

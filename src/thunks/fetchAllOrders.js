@@ -7,7 +7,7 @@ export const fetchAllOrders = () => {
       dispatch(actions.setLoading(true));
       const allOrders = await fetchData(process.env.REACT_APP_BACKEND_URL + '/api/v1/orders');
       dispatch(actions.setOrders(allOrders));
-      // dispatch(actions.setLoading(false));
+      dispatch(actions.setLoading(false));
     } catch (error) {
       dispatch(actions.setError(error.message));
     }

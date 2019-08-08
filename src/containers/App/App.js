@@ -15,44 +15,46 @@ import { fetchAllNotes } from '../../thunks/fetchAllNotes';
 export class App extends Component {
 
   componentDidMount() {
+    console.log('in app component did mount');
     const { fetchAllOrders, fetchAllNotes } = this.props;
     fetchAllOrders();
     fetchAllNotes();
   }
 
   render() {
-    console.log('App Re-Rendered');
-
     const { currentOrder, currentNote } = this.props;
-    const currNoteTabs =this.props.notes.filter(note => note.order_id === currentOrder);
+    const currNoteTabs = this.props.notes.filter(note => note.order_id === currentOrder);
     const clickedNote = this.props.notes.find(note => note.id === currentNote);
-
+    // console.log(clickedNote, "clickedNote");
     return (
       <div className='App'>
       <Header />
-        <section className="Content-Container">
-          {
-            this.props.loading &&
-            <Loading />
-          }
-          {
-            this.props.orders.length &&
-            <SideBar />
-          }
-          {
-            this.props.notes.length &&
-            <NoteContainer currNoteTabs={currNoteTabs} key={`${currentOrder}Order`}/>
-          }
-          {
-            typeof this.props.currentNote === 'number' &&
-            <NoteDisplay {...clickedNote} key={clickedNote.id}/>
-          }
-        </section>
-
+      {
+        this.props.loading
+        ? <Loading />
+        : (
+          <section className="Content-Container">
+            {
+              this.props.orders.length &&
+              <SideBar />
+            }
+            {
+              this.props.notes.length &&
+              <NoteContainer currNoteTabs={currNoteTabs} key={`${currentOrder}Order`}/>
+            }
+            {
+              typeof this.props.currentNote === 'number' &&
+              <NoteDisplay {...clickedNote} key={clickedNote.id}/>
+            }
+          </section>
+        )
+      }
       </div>
     )
   }
 }
+
+
 
 export const mapStateToProps = state => ({
   loading: state.loading,

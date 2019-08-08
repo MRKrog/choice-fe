@@ -26,8 +26,7 @@ export const noteReducer = (state = [], action) => {
       const filteredNotes = state.filter(note => {
         return note.id !== action.id
       })
-      console.log(action.id);
-      return state
+      return filteredNotes
     default:
       return state;
   }

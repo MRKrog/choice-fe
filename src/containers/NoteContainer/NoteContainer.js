@@ -11,10 +11,10 @@ export class NoteContainer extends Component {
 
   componentDidMount() {
     const { setCurrNote, currentNote, currNoteTabs } = this.props;
-    if(!currentNote.length){
+    if(currentNote === null){
       setCurrNote(currNoteTabs[0].id)
     }
-    console.log('in did mount');
+    console.log('in notecontainer mount');
   }
 
   render() {

@@ -52,11 +52,13 @@ export class NoteDisplay extends Component {
 
   handleNoteDelete = async id => {
     const { fetchDelete, currentOrder, notes, deleteNote, setCurrNote } = this.props;
-    const url = `${process.env.REACT_APP_BACKEND_URL}/api/v1/notes/${id}`;
-    let orderedNotes = notes.filter(note => note.order_id === currentOrder)
-    await fetchDelete(url);
+    // const url = `${process.env.REACT_APP_BACKEND_URL}/api/v1/notes/${id}`;
+    // await fetchDelete(url);
+    let resetNote = notes.find(note => {
+      if(note.order_id === currentOrder && note.id !== id) return note
+    })
+    setCurrNote(resetNote.id)
     deleteNote(id)
-    // setCurrNote(orderedNotes[0].id)
   }
 
   handlePriority = (priority) => {
