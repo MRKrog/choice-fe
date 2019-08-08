@@ -7,7 +7,7 @@ export const fetchAllNotes = () => {
       dispatch(actions.setLoading(true));
       const allNotes = await fetchData(process.env.REACT_APP_BACKEND_URL + '/api/v1/notes');
       dispatch(actions.setNotes(allNotes));
-      dispatch(actions.setLoading(false));
+      // dispatch(actions.setLoading(false));
     } catch (error) {
       dispatch(actions.setError(error.message));
     }

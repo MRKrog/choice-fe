@@ -54,9 +54,9 @@ export class NoteDisplay extends Component {
     const { fetchDelete, currentOrder, notes, deleteNote, setCurrNote } = this.props;
     const url = `${process.env.REACT_APP_BACKEND_URL}/api/v1/notes/${id}`;
     let orderedNotes = notes.filter(note => note.order_id === currentOrder)
-    deleteNote(id)
-    setCurrNote(orderedNotes[0].id)
     await fetchDelete(url);
+    deleteNote(id)
+    // setCurrNote(orderedNotes[0].id)
   }
 
   handlePriority = (priority) => {
@@ -68,23 +68,7 @@ export class NoteDisplay extends Component {
   }
 
   render() {
-    const { id, status } = this.props;
-    let lowStyle = 'low'
-    let mediumStyle = 'medium'
-    let highStyle = 'high'
-    console.log(status);
-    switch (status) {
-      case 0:
-        lowStyle = 'low active';
-        break;
-      case 1:
-        mediumStyle = 'medium active';
-        break;
-      case 2:
-        highStyle = 'high active';
-        break;
-      default:
-    }
+    const { id } = this.props;
     return (
       <div className='NoteDisplay'>
         <section className="NoteInput-Container ">
@@ -116,9 +100,9 @@ export class NoteDisplay extends Component {
           <div className="Note-Priority">
             <h6>Current Status</h6>
             <ul>
-              <li className={lowStyle}><button onClick={() => this.handlePriority(0)}></button></li>
-              <li className={mediumStyle}><button onClick={() => this.handlePriority(1)}></button></li>
-              <li className={highStyle}><button onClick={() => this.handlePriority(2)}></button></li>
+              <li className="low"><button onClick={() => this.handlePriority(0)}></button></li>
+              <li className="medium"><button onClick={() => this.handlePriority(1)}></button></li>
+              <li className="high"><button onClick={() => this.handlePriority(2)}></button></li>
             </ul>
           </div>
           <div className="Note-Updates">

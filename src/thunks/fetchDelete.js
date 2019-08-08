@@ -11,7 +11,7 @@ export const fetchDelete = (url) => {
       if(!response.ok){
         throw Error(response.statusText)
       }
-      dispatch(actions.setLoading(false));
+      // dispatch(actions.setLoading(false));
     } catch (error) {
       dispatch(actions.setError(error.message));
     }

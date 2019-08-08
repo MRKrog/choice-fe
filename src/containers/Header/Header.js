@@ -4,15 +4,57 @@ import PropTypes from 'prop-types';
 import * as actions from '../../actions';
 
 export class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      search: '',
+    }
+  }
 
   componentDidMount() {
 
   }
 
+  handleSearch = (e) => {
+    const { value, name } = e.target;
+    this.setState({
+      [name]: value
+    })
+
+    // var updatedList = this.state.initialItems;
+    // updatedList = updatedList.filter(function(item){
+    //   return item.toLowerCase().search(
+    //     event.target.value.toLowerCase()) !== -1;
+    // });
+    // this.setState({items: updatedList});
+
+  }
+
   render() {
+
     return (
       <div className='Header'>
-        <div></div>
+        <div className="Logo">
+          <img src={require(`../../assets/images/choiceScreenLogo.png`)} alt="Choice Screening" />
+        </div>
+        <section className="Header-Info">
+          <div className="Search-Container">
+            <form className="Form-Send">
+              <input type="text"
+                     name="search"
+                     placeholder="Search Notes"
+                     onChange={this.handleSearch}
+                     required=""
+                     value={this.state.search} />
+            </form>
+          </div>
+          <div className="User">
+            <button>
+              <i className="fas fa-user"></i>
+            </button>
+          </div>
+        </section>
+
       </div>
     )
   }

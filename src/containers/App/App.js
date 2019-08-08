@@ -7,6 +7,7 @@ import Header from '../Header/Header';
 import SideBar from '../SideBar/SideBar';
 import NoteContainer from '../NoteContainer/NoteContainer';
 import NoteDisplay from '../NoteDisplay/NoteDisplay';
+import Loading from '../../components/Loading/Loading';
 
 import { fetchAllOrders } from '../../thunks/fetchAllOrders';
 import { fetchAllNotes } from '../../thunks/fetchAllNotes';
@@ -31,6 +32,10 @@ export class App extends Component {
       <Header />
         <section className="Content-Container">
           {
+            this.props.loading &&
+            <Loading />
+          }
+          {
             this.props.orders.length &&
             <SideBar />
           }
@@ -39,10 +44,11 @@ export class App extends Component {
             <NoteContainer currNoteTabs={currNoteTabs} key={`${currentOrder}Order`}/>
           }
           {
-            typeof this.props.currentNote == 'number' &&
+            typeof this.props.currentNote === 'number' &&
             <NoteDisplay {...clickedNote} key={clickedNote.id}/>
           }
         </section>
+
       </div>
     )
   }

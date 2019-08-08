@@ -3,10 +3,14 @@
   flex-direction: column;
   justify-content: space-between;
   background: #3e3e3e;
-  padding: .6em;
+  // padding: .6em;
   flex: 1.2 1;
   border-right: solid 1px #000000;
   border-top: solid 1px #000000;
+
+  @media (max-width: $break-1200px) {
+    flex: 2 1;
+  }
 
   .OrderTab-Container {
     width: 100%;

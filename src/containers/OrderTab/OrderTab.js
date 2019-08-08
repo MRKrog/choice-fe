@@ -17,7 +17,7 @@ export class OrderTab extends Component {
 
     return (
       <div className={orderStyle} onClick={() => setCurrOrder(id)}>
-        <h4>Order #{number}</h4>
+        <h4>Order #{number}</h4><i className="fas fa-caret-right"></i>
       </div>
     )
   }

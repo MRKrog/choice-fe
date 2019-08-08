@@ -4,6 +4,13 @@ $fontOswald: 'Oswald', sans-serif;
 $fontLato: 'Lato', sans-serif;
 $fontAbel: 'Abel', sans-serif;
 
+$break-1200px: 1200px;
+$break-960px: 960px;
+$break-825px: 825px;
+$break-700px: 700px;
+$break-550px: 550px;
+$break-450px: 450px;
+
 @import './containers/App/App';
 @import './containers/Header/Header';
 @import './containers/SideBar/SideBar';
@@ -11,9 +18,9 @@ $fontAbel: 'Abel', sans-serif;
 @import './containers/NoteDisplay/NoteDisplay';
 @import './containers/OrderTab/OrderTab';
 
+@import './components/Loading/Loading';
 @import './components/NoteTab/NoteTab';
 @import './components/Footer/Footer';
-
 
 * {
   box-sizing: border-box;
