@@ -7,7 +7,6 @@ import { orderReducer } from './orderReducer';
 import { currNoteReducer } from './currNoteReducer';
 import { currOrderReducer } from './currOrderReducer';
 
-
 export const rootReducer = combineReducers({
   loading: loadingReducer,
   error: errorReducer,

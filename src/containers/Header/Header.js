@@ -11,23 +11,11 @@ export class Header extends Component {
     }
   }
 
-  componentDidMount() {
-
-  }
-
   handleSearch = (e) => {
     const { value, name } = e.target;
     this.setState({
       [name]: value
     })
-
-    // var updatedList = this.state.initialItems;
-    // updatedList = updatedList.filter(function(item){
-    //   return item.toLowerCase().search(
-    //     event.target.value.toLowerCase()) !== -1;
-    // });
-    // this.setState({items: updatedList});
-
   }
 
   render() {
@@ -54,7 +42,6 @@ export class Header extends Component {
             </button>
           </div>
         </section>
-
       </div>
     )
   }
