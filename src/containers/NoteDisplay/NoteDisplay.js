@@ -52,21 +52,16 @@ export class NoteDisplay extends Component {
 
   handleNoteDelete = async id => {
     const { fetchDelete, currentOrder, notes, deleteNote, setCurrNote, setResetNotesTab } = this.props;
-    // const url = `${process.env.REACT_APP_BACKEND_URL}/api/v1/notes/${id}`;
-    // await fetchDelete(url);
     deleteNote(id)
     let resetNote = notes.find(note => {
-      if(note.order_id === currentOrder && note.id !== id) return note
+      return note.order_id === currentOrder && note.id !== id
     })
-
-    console.log(resetNote, "resetNote");
     if(resetNote === undefined){
-      console.log('in undefined');
       setResetNotesTab(null)
     } else {
       setCurrNote(resetNote.id)
     }
-
+    await fetchDelete(id);
   }
 
   handlePriority = (priority) => {

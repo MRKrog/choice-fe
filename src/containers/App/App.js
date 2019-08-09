@@ -25,7 +25,7 @@ export class App extends Component {
     const { currentOrder, currentNote } = this.props;
     const currNoteTabs = this.props.notes.filter(note => note.order_id === currentOrder);
     const clickedNote = this.props.notes.find(note => note.id === currentNote);
-    // console.log(clickedNote, "clickedNote");
+
     return (
       <div className='App'>
       <Header />

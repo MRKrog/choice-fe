@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as actions from '../../actions';
-
 import { createNote } from '../../thunks/createNote';
-
 import NoteTab from '../NoteTab/NoteTab';
 
 export class NoteContainer extends Component {
@@ -14,12 +12,10 @@ export class NoteContainer extends Component {
     if(currentNote === null || typeof currentNote === 'number'){
       setCurrNote(currNoteTabs[0].id)
     }
-    console.log('in notecontainer mount');
   }
 
   render() {
     const { currNoteTabs, createNote, currentOrder, notes } = this.props;
-    console.log(currNoteTabs, " currNoteTabs");
     return (
       <div className='NoteContainer'>
         <section className="NoteTab-Container">
@@ -30,7 +26,7 @@ export class NoteContainer extends Component {
                 <NoteTab key={note.id} {...note} />
               )
             })
-          ) : ( createNote(currentOrder, notes) )
+            ) : ( createNote(currentOrder, notes) )
           }
         </section>
         <button className="newBtn" onClick={() => createNote(currentOrder, notes)}>
