@@ -15,7 +15,6 @@ import { fetchAllNotes } from '../../thunks/fetchAllNotes';
 export class App extends Component {
 
   componentDidMount() {
-    console.log('in app component did mount');
     const { fetchAllOrders, fetchAllNotes } = this.props;
     fetchAllOrders();
     fetchAllNotes();
