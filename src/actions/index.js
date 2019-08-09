@@ -49,3 +49,8 @@ export const deleteNote = (id) => ({
   type: "DELETE_NOTE",
   id
 });
+
+export const setResetNotesTab = (data) => ({
+  type: "RESET_NOTES",
+  data
+});

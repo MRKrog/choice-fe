@@ -51,14 +51,22 @@ export class NoteDisplay extends Component {
   }
 
   handleNoteDelete = async id => {
-    const { fetchDelete, currentOrder, notes, deleteNote, setCurrNote } = this.props;
+    const { fetchDelete, currentOrder, notes, deleteNote, setCurrNote, setResetNotesTab } = this.props;
     // const url = `${process.env.REACT_APP_BACKEND_URL}/api/v1/notes/${id}`;
     // await fetchDelete(url);
+    deleteNote(id)
     let resetNote = notes.find(note => {
       if(note.order_id === currentOrder && note.id !== id) return note
     })
-    setCurrNote(resetNote.id)
-    deleteNote(id)
+
+    console.log(resetNote, "resetNote");
+    if(resetNote === undefined){
+      console.log('in undefined');
+      setResetNotesTab(null)
+    } else {
+      setCurrNote(resetNote.id)
+    }
+
   }
 
   handlePriority = (priority) => {
@@ -70,10 +78,13 @@ export class NoteDisplay extends Component {
   }
 
   render() {
-    const { id } = this.props;
+    const { id, orders, currentOrder } = this.props;
+    let orderNumber = orders.find(order => order.id === currentOrder)
+
     return (
       <div className='NoteDisplay'>
-        <section className="NoteInput-Container ">
+        <section className="NoteInput-Container">
+          <h5 className="Order-Number">Order #{orderNumber.number}</h5>
           <div className="NoteTitle-Container">
             <label>Title</label>
             <input type="text"
@@ -129,7 +140,8 @@ export const mapStateToProps = state => ({
   loading: state.loading,
   currentNote: state.currentNote,
   currentOrder: state.currentOrder,
-  notes: state.notes
+  notes: state.notes,
+  orders: state.orders,
 });
 
 export const mapDispatchToProps = dispatch => ({
@@ -139,6 +151,7 @@ export const mapDispatchToProps = dispatch => ({
   fetchDelete: data => dispatch(fetchDelete(data)),
   updateNote: (id, info) => dispatch(actions.updateNote(id, info)),
   updateStatus: (id, status) => dispatch(actions.updateStatus(id, status)),
+  setResetNotesTab: data => dispatch(actions.setResetNotesTab(data)),
 });
 
 NoteDisplay.propTypes = {

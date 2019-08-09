@@ -17,9 +17,9 @@ $break-450px: 450px;
 @import './containers/NoteContainer/NoteContainer';
 @import './containers/NoteDisplay/NoteDisplay';
 @import './containers/OrderTab/OrderTab';
+@import './containers/NoteTab/NoteTab';
 
 @import './components/Loading/Loading';
-@import './components/NoteTab/NoteTab';
 @import './components/Footer/Footer';
 
 * {

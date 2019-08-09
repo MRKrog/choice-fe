@@ -11,12 +11,19 @@
     flex-direction: column;
     padding-bottom: 1em;
 
+    .Order-Number {
+      margin: 0;
+      font-family: $fontOswald;
+      font-weight: 100;
+      color: #6161616b;
+      text-align: right;
+    }
+
     label {
-      color: #616161;
+      color: #6161616b;
       font-size: 15px;
       padding-bottom: .25em;
       font-weight: 100;
-      opacity: .25;
       letter-spacing: .02em;
       font-family: $fontOswald;
     }

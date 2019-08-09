@@ -32,15 +32,12 @@
     }
   }
 
-  &:first-child {
-    // padding-top: 0;
-  }
-
   h4 {
     margin: 0;
     font-family: $fontAbel;
     color: #e6e6e6;
-    font-size: 1.2em;
+    font-size: 1.3em;
     letter-spacing: .03em;
+    font-weight: 300;
   }
 }
