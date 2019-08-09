@@ -14,10 +14,10 @@ import { fetchAllNotes } from '../../thunks/fetchAllNotes';
 
 export class App extends Component {
 
-  componentDidMount() {
+  async componentDidMount() {
     const { fetchAllOrders, fetchAllNotes } = this.props;
-    fetchAllOrders();
-    fetchAllNotes();
+    await fetchAllOrders();
+    await fetchAllNotes();
   }
 
   render() {
